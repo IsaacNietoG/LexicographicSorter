@@ -31,6 +31,12 @@ public class LectorGeneral {
         renglones = new Lista<StringOrdenable>();
     }
 
+    /**
+     *  Lee el texto recibido mediante la entrada estandar del programa.
+     *
+     *  Si no se ha proporcionado nada mediante la entrada estandar del sistema, no se hace
+     *  nada.
+     *  */
     public void leerEntradaEstandar(){
         try{
             if(!standardIn.ready()){
@@ -76,6 +82,9 @@ public class LectorGeneral {
         }
     }
 
+    /**
+     *  @return la lista de renglones obtenida.
+     *  */
     public Lista<StringOrdenable> getLista(){
         return this.renglones;
     }

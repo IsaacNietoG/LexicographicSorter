@@ -55,6 +55,10 @@ public class StringOrdenable implements Comparable<StringOrdenable>{
         return comparable.compareTo(arg0.comparable);
     }
 
+    /**
+     *  Para asegurarnos que todo funciona bien, la representacion toString de este objeto es la
+     *  string original
+     *  */
     @Override
     public String toString() {
         return original;
