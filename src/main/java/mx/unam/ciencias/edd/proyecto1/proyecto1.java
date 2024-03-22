@@ -90,14 +90,20 @@ public class proyecto1 {
 
         listaRenglones = Lista.mergeSort(listaRenglones); //Ya que StringOrdenable es comparable, podemos usar el metodo que no pide lambda
 
-        for(StringOrdenable e: listaRenglones){
-            System.out.println(e.comparable);
+        if(listaRenglones.esVacia()){
+            uso();
         }
-        System.out.println("Salida:");
-        for(StringOrdenable e: listaRenglones){
-            System.out.println(e);
-        }
-        
+        //Dumpeo
+
+        EscritorGeneral<StringOrdenable> escritor;
+        if(outputDefinido)
+            escritor = new EscritorGeneral<>(listaRenglones, output);
+        else
+            escritor = new EscritorGeneral<>(listaRenglones);
+
+        escritor.volcarAConsola(invertido);
+        escritor.volcarATexto(invertido);
+
     }
 
     /**
