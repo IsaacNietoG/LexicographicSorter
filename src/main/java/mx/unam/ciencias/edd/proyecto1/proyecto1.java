@@ -82,9 +82,15 @@ public class proyecto1 {
 
         Lista<StringOrdenable> listaRenglones = lector.getLista();
 
+        listaRenglones = Lista.mergeSort(listaRenglones); //Ya que StringOrdenable es comparable, podemos usar el metodo que no pide lambda
 
+        System.out.println(listaRenglones);
+        
     }
 
+    /**
+     *  
+     *  */
     public static void agregarFuente(String ruta, Lista<File> fuentes) throws IOException{
         File archivo = new File(ruta);
         if(!archivo.isFile() || !archivo.canRead())
