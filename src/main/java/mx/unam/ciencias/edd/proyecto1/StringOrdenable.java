@@ -11,6 +11,8 @@ import java.text.Normalizer;
  * Para acomodarse a estos requisitos, realizamos las siguientes acciones en las strings que
  * realmente vamos a comparar.
  *
+ * - Convertimos a minusculas
+ * - Eliminamos espacios exteriores
  * - Eliminamos espacios y caracteres distintos a letras
  * - Convierte acentos y dieresis a sus versiones vocales
  * - Convierte las eñes a enes
@@ -30,11 +32,13 @@ public class StringOrdenable implements Comparable<StringOrdenable>{
      *
      *  */
     private String arreglarOriginal(){
-        char[] out = new char[original.length()];
-        original = Normalizer.normalize(original, Normalizer.Form.NFD);
+        String normalizar = Normalizer.normalize(original.toLowerCase().trim()
+                                                 .replaceAll("[^a-zA-Z0-9]", ""),
+                                                 Normalizer.Form.NFD);
+        char[] out = new char[normalizar.length()];
         int j = 0;
-        for (int i = 0, n = original.length(); i < n; ++i) {
-            char c = original.charAt(i);
+        for (int i = 0, n = normalizar.length(); i < n; ++i) {
+            char c = normalizar.charAt(i);
             if (c <= '\u007F') out[j++] = c;
         }
         return new String(out);
@@ -49,5 +53,10 @@ public class StringOrdenable implements Comparable<StringOrdenable>{
     @Override
     public int compareTo(StringOrdenable arg0) {
         return comparable.compareTo(arg0.comparable);
+    }
+
+    @Override
+    public String toString() {
+        return original;
     }
 }

@@ -28,9 +28,17 @@ public class LectorGeneral {
     public LectorGeneral(InputStreamReader standardIn, Lista<File> archivos){
         this.archivos = archivos;
         this.standardIn = standardIn;
+        renglones = new Lista<StringOrdenable>();
     }
 
     public void leerEntradaEstandar(){
+        try{
+            if(!standardIn.ready()){
+                standardIn.close();
+            }
+        }catch (IOException e){
+            return;
+        }
         BufferedReader reader = new BufferedReader(standardIn);
         String renglon;
         try{

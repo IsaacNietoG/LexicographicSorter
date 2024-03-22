@@ -16,7 +16,7 @@ import mx.unam.ciencias.edd.Lista;
  *  Si el programa recibe más de dos archivos como entrada, debe de juntarlos en un solo output.
  *
  *  La salida se ordena de manera lexicográfica, es decir, una generalización del orden alfabético. Para detalles acerca del orden, vease
- *  LineaDeTexto, ya que ese será el objeto comparable que utilizaremos.
+ *  StringComparable, ya que ese será el objeto comparable que utilizaremos.
  *
  *  Banderas que puede recibir el programa:
  *
@@ -33,6 +33,11 @@ public class proyecto1 {
         System.exit(0);
     }
 
+    /**
+     *  El principal método de nuestro proyecto.
+     *
+     *
+     *  */
     public static void main(String[] args) {
         //Estado de las banderas
         boolean invertido = false;
@@ -76,7 +81,8 @@ public class proyecto1 {
 
         //Comenzamos a reunir nuestras fuentes en una sola lista. Para esto usamos la clase LectorGeneral
 
-        LectorGeneral lector = new LectorGeneral(new InputStreamReader(System.in), archivos);
+        InputStreamReader entradaEstandar = new InputStreamReader(System.in);
+        LectorGeneral lector = new LectorGeneral(entradaEstandar, archivos);
         lector.leerEntradaEstandar();
         lector.leerArchivos();
 
@@ -84,17 +90,27 @@ public class proyecto1 {
 
         listaRenglones = Lista.mergeSort(listaRenglones); //Ya que StringOrdenable es comparable, podemos usar el metodo que no pide lambda
 
-        System.out.println(listaRenglones);
+        for(StringOrdenable e: listaRenglones){
+            System.out.println(e.comparable);
+        }
+        System.out.println("Salida:");
+        for(StringOrdenable e: listaRenglones){
+            System.out.println(e);
+        }
         
     }
 
     /**
-     *  
+     *  Agrega un archivo a la lista de archivos del programa.
+     *
+     *  Primero verifica si la ruta pasada es un archivo y si el mismo es legible.
      *  */
     public static void agregarFuente(String ruta, Lista<File> fuentes) throws IOException{
         File archivo = new File(ruta);
-        if(!archivo.isFile() || !archivo.canRead())
+        if(!archivo.isFile() || !archivo.canRead()){
+            System.out.println("La ruta especificada por: " + ruta + " no es legible o no es un archivo, omitiendo...");
             throw new IOException();
+        }
         fuentes.agrega(archivo);
     }
 
