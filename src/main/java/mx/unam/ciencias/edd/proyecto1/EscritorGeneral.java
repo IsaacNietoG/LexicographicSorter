@@ -82,9 +82,9 @@ public class EscritorGeneral<T> {
             return;
         }
 
-        PrintWriter escritor=null;
+        final PrintWriter escritor;
         try{
-            escritor = new PrintWriter(output);
+             escritor = new PrintWriter(output);
         }catch(FileNotFoundException e){
             return;
         }
@@ -92,7 +92,7 @@ public class EscritorGeneral<T> {
         if(!invertido)
             recorridoNormal((a) -> escritor.println(a));
         else
-            recorridoNormal((a) -> escritor.println(a));
+            recorridoReversa((a) -> escritor.println(a));
 
         escritor.close();
     }
